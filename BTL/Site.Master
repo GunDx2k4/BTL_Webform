@@ -36,106 +36,87 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
-        
-                <%--HEADER--%>
-        <nav class="navbar navbar-expand-md bg-light sticky-top border-bottom">
+
+        <%--HEADER--%>
+        <nav class="navbar navbar-expand-md sticky-top bg-body border-bottom">
             <div class="container d-flex flex-wrap">
-              <ul class="nav me-auto">
-                <li class="nav-item"><a href="/" class="nav-link link-body-emphasis px-2 active" aria-current="page">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Features</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Pricing</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">FAQs</a></li>
-                <li class="nav-item"><a href="/About" class="nav-link link-body-emphasis px-2">About</a></li>
-              </ul>
-              <ul class="nav">
-                <li class="nav-item"><a href="/Login" class="nav-link link-body-emphasis px-2">Login</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Sign up</a></li>
-              </ul>
+                <ul class="nav me-auto">
+                    <li class="nav-item"><a href="/" class="nav-link link-body-emphasis px-2 active" aria-current="page">Home</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Features</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Pricing</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">FAQs</a></li>
+                    <li class="nav-item"><a href="/About" class="nav-link link-body-emphasis px-2">About</a></li>
+                </ul>
+                <ul class="nav">
+                    <li class="nav-item"><a href="/Login" class="nav-link link-body-emphasis px-2">Login</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Sign up</a></li>
+                </ul>
             </div>
         </nav>
-        
-        <div class="container">
-            <header class="py-3 mb-4 border-bottom">
+
+        <div class="bg-body">
+            <header class="py-3 mb-4">
                 <div class="container d-flex flex-wrap justify-content-center">
-                  <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none">
-                    <img src="/favicon.ico" width="40" height="40" class="me-1"/>
-                    <span class="fs-4">Learning Management System</span>
-                  </a>
-                  <input type="search" class="form-control ms-3" placeholder="Search..." aria-label="Search">
+                    <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none">
+                        <img src="/favicon.ico" width="40" height="40" class="me-1" />
+                        <span class="fs-4">Learning Management System</span>
+                    </a>
+                    <input type="search" class="form-control ms-3" placeholder="Search..." aria-label="Search" />
                 </div>
             </header>
         </div>
-                <%--MAIN--%>
-        <div class="container body-content">
+
+        <%--MAIN--%>
+        <div>
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
         </div>
-        
-                <%--FOOTER--%>
 
+        <%--FOOTER--%>
+        <div class="border-top bg-body">
+            <footer class="container mt-5 pt-5">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <div class="mb-3">
+                            <a href="/" class="d-inline-flex align-items-center mb-2 text-body-emphasis text-decoration-none" aria-label="Learning Management System">
+                                <img src="/favicon.ico" width="40" height="40" class="d-block me-2" />
+                                <span class="fs-5">Learning Management System</span>
+                            </a>
+                            <ul class="list-unstyled small">
+                                <li class="mb-2">Điện thoại: <a href="#">0987654321</a></li>
+                                <li class="mb-2">Email: <a href="#">abc@gmail.com</a></li>
+                                <li class="mb-2">Địa chỉ: 96 Định Công, Hoàng Mai, Hà Nội</li>
+                            </ul>
+                        </div>
+                    </div>
 
-        <div class="container">
-  <footer class="mt-5 pt-5 border-top">
-    <div class="row">
-      <div class="col-6 col-md-2 mb-3">
-        <h5>Section</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
-        </ul>
-      </div>
+                    <div class="col-6 col-md-2 mb-3">
+                    </div>
 
-      <div class="col-6 col-md-2 mb-3">
-        <h5>Section</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
-        </ul>
-      </div>
+                    <div class="col-6 col-md-2 mb-3">
+                    </div>
 
-      <div class="col-6 col-md-2 mb-3">
-        <h5>Section</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
-        </ul>
-      </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="mb-3">
+                            <h4>CÔNG TY CỔ PHẦN CÔNG NGHỆ GIÁO DỤC ABCXYZ</h4>
+                            <ul class="list-unstyled small">
+                                <li class="mb-2"><b>Ngày thành lập:</b> 01/01/2024</li>
+                                <li class="mb-2"><b>Lĩnh vực hoạt động:</b> Giáo dục, công nghệ - lập trình. Chúng tôi tập trung xây dựng và phát triển các sản phẩm mang lại giá trị cho cộng đồng lập trình viên Việt Nam.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
-      <div class="col-md-5 offset-md-1 mb-3">
-        <div class="mb-3">
-  <a href="/" class="d-inline-flex align-items-center mb-2 text-body-emphasis text-decoration-none" aria-label="Learning Management System">
-    <img src="/favicon.ico" width="40" height="40" class="d-block me-2"/>
-    <span class="fs-5">Learning Management System</span>
-  </a>
-  <ul class="list-unstyled small">
-      <li class="mb-2">Điện thoại: <a href="#">0987654321</a></li>
-      <li class="mb-2">Email: <a href="#">abc@gmail.com</a></li>
-      <li class="mb-2">Địa chỉ: 96 Định Công, Hoàng Mai, Hà Nội</li>
-  </ul>
-</div>
-      </div>
-    </div>
-
-    <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-                <p>&copy; <%: DateTime.Now.Year %> - Learning Management System</p>
-      <ul class="list-unstyled d-flex">
-                <li class="ms-3"><a class="link-body-emphasis" href="#"><i class="bi bi-youtube"></i></a></li>
-                <li class="ms-3"><a class="link-body-emphasis" href="#"><i class="bi bi-facebook"></i></a></li>
-                <li class="ms-3"><a class="link-body-emphasis" href="#"><i class="bi bi-instagram"></i></a></li>
-      </ul>
-    </div>
-  </footer>
-</div>
-          </footer>
+                <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+                    <p>&copy; <%: DateTime.Now.Year %> - Learning Management System</p>
+                    <ul class="list-unstyled d-flex">
+                        <li class="ms-3"><a class="link-body-emphasis" href="#"><i class="bi bi-youtube"></i></a></li>
+                        <li class="ms-3"><a class="link-body-emphasis" href="#"><i class="bi bi-facebook"></i></a></li>
+                        <li class="ms-3"><a class="link-body-emphasis" href="#"><i class="bi bi-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </footer>
+        </div>
     </form>
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/Scripts/bootstrap.js") %>
