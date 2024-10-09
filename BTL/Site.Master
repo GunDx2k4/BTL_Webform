@@ -54,18 +54,6 @@
             </div>
         </nav>
 
-        <div class="bg-body">
-            <header class="py-3 mb-4">
-                <div class="container d-flex flex-wrap justify-content-center">
-                    <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none">
-                        <img src="/favicon.ico" width="40" height="40" class="me-1" />
-                        <span class="fs-4">Learning Management System</span>
-                    </a>
-                    <input type="search" class="form-control ms-3" placeholder="Search..." aria-label="Search" />
-                </div>
-            </header>
-        </div>
-
         <%--MAIN--%>
         <div>
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
