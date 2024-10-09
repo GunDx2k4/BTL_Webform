@@ -45,6 +45,15 @@
                                 <input type="password" class="form-control" id="pass2Input" placeholder="Confirm Password">
                                 <label for="pass2Input">Confirm Password</label>
                             </div>
+                            <div class="input-group w-auto mx-2 mb-2">
+                                <label class="input-group-text" for="inputGroupRole">Role</label>
+                                <select class="form-select" id="inputGroupRole">
+                                    <option disabled selected hidden>Choose role account</option>
+                                    <option value="1">Student</option>
+                                    <option value="2">Teacher</option>
+                                    <option value="3">Manager</option>
+                                </select>
+                            </div>
                             <button class="btn btn-primary w-100 py-2" type="submit">Login</button>
                         </div>
                     </div>
