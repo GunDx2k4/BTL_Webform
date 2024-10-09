@@ -8,7 +8,7 @@
                 <h3 class="fw-normal text-muted mb-3">Empower your learning journey with our state-of-the-art LMS. <br> Access courses, track progress, and achieve your goals.</h3>
             </div> 
             <div class="d-flex gap-3 justify-content-center lead fw-normal">
-                <a href="#" class="btn btn-primary">Get Started</a>
+                <a href="/Login" class="btn btn-primary">Get Started</a>
             </div>
         </div>
 
