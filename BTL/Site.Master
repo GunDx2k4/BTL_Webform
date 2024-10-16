@@ -12,7 +12,7 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
@@ -48,14 +48,30 @@
                     <li class="nav-item"><a href="/About" class="nav-link link-body-emphasis px-2">About</a></li>
                 </ul>
                 <ul class="nav">
-                    <li class="nav-item"><a href="/Login" class="nav-link link-body-emphasis px-2">Login</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Sign up</a></li>
+                    <li class="nav-item"><a href="/Login" class="nav-link link-body-emphasis px-2">
+                        <asp:Label ID="lblLogin" runat="server" Text="Login"></asp:Label></a></li>
                 </ul>
             </div>
         </nav>
 
         <%--MAIN--%>
         <div>
+            <div class="modal fade" id="modalNotify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Message</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
         </div>
@@ -105,6 +121,12 @@
                 </div>
             </footer>
         </div>
+        <script>
+            function showModal() {
+                var modal = new bootstrap.Modal(document.getElementById('modalNotify'));
+                modal.show();
+            }
+        </script>
     </form>
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/Scripts/bootstrap.js") %>

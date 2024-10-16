@@ -1,4 +1,6 @@
-﻿<%@ Page  Title="Login" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="BTL.Login" %>
+﻿<%@ Page Title="Login" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="BTL.Login" %>
+
+<%@ MasterType VirtualPath="~/Site.Master" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <main>
@@ -19,30 +21,30 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="m-3 tab-pane fade show active" id="login-tab-pane" role="tabpanel" aria-labelledby="login-tab" tabindex="0">
                             <div class="form-floating mx-2 mb-2">
-                                <input type="email" class="form-control" id="emailInput" placeholder="name@example.com">
-                                <label for="emailInput">Email address</label>
+                                <asp:TextBox type="email" class="form-control" ID="txtEmail" runat="server" placeholder="name@example.com" />
+                                <label for="txtEmail">Email address</label>
                             </div>
                             <div class="form-floating mx-2 mb-2">
-                                <input type="password" class="form-control" id="passInput" placeholder="Password">
-                                <label for="passInput">Password</label>
+                                <asp:TextBox type="password" class="form-control" ID="txtPass" runat="server" placeholder="Password" />
+                                <label for="txtPass">Password</label>
                             </div>
-                            <button class="btn btn-primary w-100 py-2" type="submit">Login</button>
+                            <asp:Button class="btn btn-primary w-100 py-2" type="submit" Text="Login" runat="server" OnClick="btnSubmit_Click" />
                         </div>
                         <div class="m-3 tab-pane fade" id="register-tab-pane" role="tabpanel" aria-labelledby="register-tab" tabindex="0">
-                            <div class="form-floating mx-2 mb-2">    
-                                <input type="text" class="form-control" id="nameInput" placeholder="Full Name">
-                                <label for="nameInput">Full Name</label>
-                            </div>
-                            <div class="form-floating mx-2 mb-2">    
-                                <input type="email" class="form-control" id="emailRegisterInput" placeholder="name@example.com">
-                                <label for="emailRegisterInput">Email address</label>
+                            <div class="form-floating mx-2 mb-2">
+                                <asp:TextBox type="text" class="form-control" ID="txtNameRegister" runat="server" placeholder="Full Name" />
+                                <label for="txtNameRegister">Full Name</label>
                             </div>
                             <div class="form-floating mx-2 mb-2">
-                                <input type="password" class="form-control" id="passRegisterInput" placeholder="Password">
-                                <label for="passRegisterInput">Password</label>
+                                <asp:TextBox type="text" class="form-control" ID="txtEmailRegister" runat="server" placeholder="name@example.com" />
+                                <label for="txtEmailRegister">Email address</label>
                             </div>
                             <div class="form-floating mx-2 mb-2">
-                                <input type="password" class="form-control" id="pass2Input" placeholder="Confirm Password">
+                                <asp:TextBox type="text" class="form-control" ID="txtPassRegister" runat="server" placeholder="Password" />
+                                <label for="txtPassRegister">Password</label>
+                            </div>
+                            <div class="form-floating mx-2 mb-2">
+                                <asp:TextBox type="text" class="form-control" ID="txtPassConfirmRegister" runat="server" placeholder="Confirm Password" />
                                 <label for="pass2Input">Confirm Password</label>
                             </div>
                             <div class="input-group w-auto mx-2 mb-2">
@@ -54,11 +56,24 @@
                                     <option value="3">Manager</option>
                                 </select>
                             </div>
-                            <button class="btn btn-primary w-100 py-2" type="submit">Login</button>
+                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                <ContentTemplate>
+                                    <asp:Button ID="btnRegister" class="btn btn-primary w-100 py-2" type="submit" runat="server" Text="Register" OnClick="btnRegister_Click" />
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <script src="./Scripts/JS/inputHandler.js"></script>
+        <script>
+            function btnRegisterClick() {
+                if (!validateName(document.getElementById('txtNameRegister').value)) {
+                    showModal()
+                }
+                return false;
+            }
+        </script>
     </main>
 </asp:Content>

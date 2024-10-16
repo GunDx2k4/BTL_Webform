@@ -17,5 +17,18 @@ namespace BTL
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        void Session_Start(object sender, EventArgs e)
+        {
+            Session["Login"] = false;
+            Session["Role"] = string.Empty;
+            Session["Account"] = string.Empty;
+            Session["Password"] = string.Empty;
+        }
+
+        void Session_End(object sender, EventArgs e)
+        {
+            Response.Redirect("Default.aspx");
+        }
     }
 }
