@@ -4,6 +4,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <main>
+
         <div class="bg-body d-flex justify-content-center p-5">
             <div class="card">
                 <div class="card-body">
@@ -45,35 +46,21 @@
                             </div>
                             <div class="form-floating mx-2 mb-2">
                                 <asp:TextBox type="text" class="form-control" ID="txtPassConfirmRegister" runat="server" placeholder="Confirm Password" />
-                                <label for="pass2Input">Confirm Password</label>
+                                <label for="txtPassConfirmRegister">Confirm Password</label>
                             </div>
                             <div class="input-group w-auto mx-2 mb-2">
                                 <label class="input-group-text" for="inputGroupRole">Role</label>
-                                <select class="form-select" id="inputGroupRole">
-                                    <option disabled selected hidden>Choose role account</option>
-                                    <option value="1">Student</option>
-                                    <option value="2">Teacher</option>
-                                    <option value="3">Manager</option>
-                                </select>
+                                <asp:DropDownList CssClass="form-select" ID="inputGroupRole" runat="server">
+                                    <asp:ListItem Value="Student" Text="Student" />
+                                    <asp:ListItem Value="Teacher" Text="Teacher" />
+                                    <asp:ListItem Value="Administrator" Text="Manager" />
+                                </asp:DropDownList>
                             </div>
-                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                                <ContentTemplate>
-                                    <asp:Button ID="btnRegister" class="btn btn-primary w-100 py-2" type="submit" runat="server" Text="Register" OnClick="btnRegister_Click" />
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
+                            <asp:Button ID="btnRegister" class="btn btn-primary w-100 py-2" type="submit" runat="server" Text="Register" OnClick="btnRegister_Click" />
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <script src="./Scripts/JS/inputHandler.js"></script>
-        <script>
-            function btnRegisterClick() {
-                if (!validateName(document.getElementById('txtNameRegister').value)) {
-                    showModal()
-                }
-                return false;
-            }
-        </script>
     </main>
 </asp:Content>
