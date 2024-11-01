@@ -47,6 +47,13 @@ CREATE TABLE tblAssignments (
     sUrl VARCHAR(255),
     FOREIGN KEY (FK_iIDCourse) REFERENCES tblCourse(PK_iID))
 
+CREATE TABLE tblMaterials (
+    PK_iID INT IDENTITY(1,1) PRIMARY KEY,
+    FK_iIDClassroom INT,
+    sName NVARCHAR(100),
+    sURl VARCHAR(255),
+    FOREIGN KEY (FK_iIDClassroom) REFERENCES tblClassroom(PK_iID))
+
 
     
 
