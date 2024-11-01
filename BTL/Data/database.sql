@@ -4,8 +4,9 @@ CREATE TABLE tblUser (
     PK_iID INT IDENTITY(1,1) PRIMARY KEY,
     sUsername NVARCHAR(50) NOT NULL,
     sPassword NVARCHAR(50) NOT NULL,
-    sRole INT NOT NULL,
-    sEmail VARCHAR(100))
+    iRole INT NOT NULL,
+    sEmail VARCHAR(100),
+    CONSTRAINT chk_iRole CHECK (iRole BETWEEN 0 AND 2)) -- 0: Student, 1: Instructor, 2: Administrator
 
 CREATE TABLE tblCourse (
     PK_iID INT IDENTITY(1,1) PRIMARY KEY,
