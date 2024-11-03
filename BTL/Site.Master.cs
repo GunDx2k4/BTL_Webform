@@ -11,7 +11,7 @@ namespace BTL
             if ((bool)Session["Login"])
             {
                 MultiViewNav.ActiveViewIndex = 1;
-                lblUser.Text = Session["Username"].ToString();
+                lblUser.Text = Session["Account"].ToString();
             }
             else
             {
@@ -23,8 +23,7 @@ namespace BTL
 
         protected void btnLogout_Click(object sender, EventArgs e)
         {
-            MultiViewNav.ActiveViewIndex = 0;
-            lblUser.Text = string.Empty;
+            Session["Login"] = false;
             Session.Abandon();
             Response.Redirect("~/");
         }

@@ -24,6 +24,15 @@ namespace BTL
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
+        /// RequiredFieldValidatorEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorEmail;
+
+        /// <summary>
         /// txtPass control.
         /// </summary>
         /// <remarks>
@@ -33,58 +42,22 @@ namespace BTL
         protected global::System.Web.UI.WebControls.TextBox txtPass;
 
         /// <summary>
-        /// txtNameRegister control.
+        /// RequiredFieldValidatorPass control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNameRegister;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorPass;
 
         /// <summary>
-        /// txtEmailRegister control.
+        /// btnLogin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmailRegister;
-
-        /// <summary>
-        /// txtPassRegister control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPassRegister;
-
-        /// <summary>
-        /// txtPassConfirmRegister control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPassConfirmRegister;
-
-        /// <summary>
-        /// inputGroupRole control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList inputGroupRole;
-
-        /// <summary>
-        /// btnRegister control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRegister;
+        protected global::System.Web.UI.WebControls.Button btnLogin;
 
         /// <summary>
         /// Master property.

@@ -4,59 +4,67 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <main>
-
-        <div class="bg-body d-flex justify-content-center p-5">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Welcome to Acme LMS</h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Login or create an account to get started</h6>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login-tab-pane" type="button" role="tab" aria-controls="login-tab-pane" aria-selected="true">Login</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register-tab-pane" type="button" role="tab" aria-controls="register-tab-pane" aria-selected="false">Register</button>
-                        </li>
-                    </ul>
-
-                    <div class="tab-content" id="myTabContent">
-                        <div class="m-3 tab-pane fade show active" id="login-tab-pane" role="tabpanel" aria-labelledby="login-tab" tabindex="0">
-                            <div class="form-floating mx-2 mb-2">
-                                <asp:TextBox type="email" class="form-control" ID="txtEmail" runat="server" placeholder="name@example.com" />
-                                <label for="txtEmail">Email address</label>
-                            </div>
-                            <div class="form-floating mx-2 mb-2">
-                                <asp:TextBox type="password" class="form-control" ID="txtPass" runat="server" placeholder="Password" />
-                                <label for="txtPass">Password</label>
-                            </div>
-                            <asp:Button class="btn btn-primary w-100 py-2" type="submit" Text="Login" runat="server" OnClick="btnSubmit_Click" />
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-lg-6 d-md-flex align-items-center justify-content-center bg-primary bg-opacity-10 vh-lg-100">
+                    <div class="p-3 p-lg-5">
+                        <div class="text-center">
+                            <h2 class="fw-bold">Welcome to Acme Learning Management System</h2>
+                            <p class="mb-0 h6 fw-light">Let's learn something new today!</p>
                         </div>
-                        <div class="m-3 tab-pane fade" id="register-tab-pane" role="tabpanel" aria-labelledby="register-tab" tabindex="0">
-                            <div class="form-floating mx-2 mb-2">
-                                <asp:TextBox type="text" class="form-control" ID="txtNameRegister" runat="server" placeholder="Full Name" />
-                                <label for="txtNameRegister">Full Name</label>
+                        <img src="/Assets/thumbnail_login.svg" class="mt-5" />
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-6 m-auto">
+                    <div class="row my-5">
+                        <div class="col-sm-10 col-xl-8 m-auto">
+                            <h1 class="fs-2">Welcome Back</h1>
+                            <div class="mb-4">
+                                <label for="txtEmail">Email address</label>
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3">
+                                        <i class="bi bi-envelope-fill"></i>
+                                    </span>
+                                    <asp:TextBox ID="txtEmail" runat="server" Type="email" Style="max-width: 100% !important;" CssClass="form-control border-0 bg-light rounded-end ps-1" placeholder="name@example.com" />
+                                </div>
+
+                                <asp:RequiredFieldValidator
+                                    ID="RequiredFieldValidatorEmail"
+                                    runat="server"
+                                    ControlToValidate="txtEmail"
+                                    ErrorMessage="Tài khoản không được để trống."
+                                    ForeColor="Red"
+                                    CssClass="" />
                             </div>
-                            <div class="form-floating mx-2 mb-2">
-                                <asp:TextBox type="text" class="form-control" ID="txtEmailRegister" runat="server" placeholder="name@example.com" />
-                                <label for="txtEmailRegister">Email address</label>
+
+                            <div class="mb-4">
+                                <label for="txtPass">Password</label>
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3">
+                                        <i class="bi bi-lock-fill"></i>
+                                    </span>
+                                    <asp:TextBox ID="txtPass" runat="server" Type="password" Style="max-width: 100% !important;" CssClass="form-control border-0 bg-light rounded-end ps-1" placeholder="Password" />
+
+                                </div>
+                                <asp:RequiredFieldValidator
+                                    ID="RequiredFieldValidatorPass"
+                                    runat="server"
+                                    ControlToValidate="txtPass"
+                                    ErrorMessage="Mật khẩu không được để trống."
+                                    ForeColor="Red"
+                                    CssClass="" />
                             </div>
-                            <div class="form-floating mx-2 mb-2">
-                                <asp:TextBox type="text" class="form-control" ID="txtPassRegister" runat="server" placeholder="Password" />
-                                <label for="txtPassRegister">Password</label>
+
+                            <div class="align-items-center mt-0">
+                                <div class="d-grid">
+                                    <asp:Button ID="btnLogin" runat="server" Style="max-width: 100% !important;" CssClass="btn btn-primary mb-0" Type="button" Text="Login" OnClick="btnLogin_Click" />
+                                </div>
                             </div>
-                            <div class="form-floating mx-2 mb-2">
-                                <asp:TextBox type="text" class="form-control" ID="txtPassConfirmRegister" runat="server" placeholder="Confirm Password" />
-                                <label for="txtPassConfirmRegister">Confirm Password</label>
+
+                            <div class="mt-4 text-center">
+                                <span>Don't have an account? <a href="/SignUp">Signup here</a></span>
                             </div>
-                            <div class="input-group w-auto mx-2 mb-2">
-                                <label class="input-group-text" for="inputGroupRole">Role</label>
-                                <asp:DropDownList CssClass="form-select" ID="inputGroupRole" runat="server">
-                                    <asp:ListItem Value="Student" Text="Student" />
-                                    <asp:ListItem Value="Teacher" Text="Teacher" />
-                                    <asp:ListItem Value="Administrator" Text="Manager" />
-                                </asp:DropDownList>
-                            </div>
-                            <asp:Button ID="btnRegister" class="btn btn-primary w-100 py-2" type="submit" runat="server" Text="Register" OnClick="btnRegister_Click" />
                         </div>
                     </div>
                 </div>
