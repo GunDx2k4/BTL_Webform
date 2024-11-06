@@ -11,7 +11,8 @@ namespace BTL
             if ((bool)Session["Login"])
             {
                 MultiViewNav.ActiveViewIndex = 1;
-                lblUser.Text = Session["Account"].ToString();
+                lblUser.Text = Session["User"].ToString();
+                lblEmail.Text = Session["Email"].ToString();
             }
             else
             {
@@ -28,5 +29,9 @@ namespace BTL
             Response.Redirect("~/");
         }
 
+        protected void btnProfile_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

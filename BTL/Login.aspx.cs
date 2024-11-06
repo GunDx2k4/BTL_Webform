@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -28,7 +29,8 @@ namespace BTL
                 });
                 return;
             }
-            Session["Account"] = txtEmail.Text;
+            Session["Email"] = txtEmail.Text;
+            Session["User"] = table.Rows[0].Field<string>("sUsername");
             Session["Login"] = true;
             Response.Redirect("Courses");
         }

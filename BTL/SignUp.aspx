@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="SignUp" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SignUp.aspx.cs" Inherits="BTL.SignUp" %>
 
+<%@ MasterType VirtualPath="~/Site.Master" %>
+
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <main>
         <div class="container-fluid">
@@ -25,9 +27,16 @@
                                     <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3">
                                         <i class="bi bi-person-fill"></i>
                                     </span>
-                                    <input type="text" style="max-width: 100% !important;" class="form-control border-0 bg-light rounded-end ps-1" id="nameInput" placeholder="Your Name" />
+                                    <asp:TextBox ID="txtName" runat="server" Type="text" Style="max-width: 100% !important;" CssClass="form-control border-0 bg-light rounded-end ps-1" placeholder="Your Name" />
                                 </div>
                             </div>
+                            <asp:RequiredFieldValidator
+                                ID="RequiredFieldValidatorName"
+                                runat="server"
+                                ControlToValidate="txtName"
+                                ErrorMessage="Tên không được để trống."
+                                ForeColor="Red"
+                                CssClass="" />
 
                             <div class="mb-4">
                                 <label for="emailInput">Email address</label>
@@ -35,9 +44,16 @@
                                     <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3">
                                         <i class="bi bi-envelope-fill"></i>
                                     </span>
-                                    <input type="email" style="max-width: 100% !important;" class="form-control border-0 bg-light rounded-end ps-1" id="emailInput" placeholder="name@example.com" />
+                                    <asp:TextBox ID="txtEmail" runat="server" type="email" Style="max-width: 100% !important;" CssClass="form-control border-0 bg-light rounded-end ps-1" placeholder="name@example.com" />
                                 </div>
                             </div>
+                            <asp:RequiredFieldValidator
+                                ID="RequiredFieldValidatorEmail"
+                                runat="server"
+                                ControlToValidate="txtEmail"
+                                ErrorMessage="Email không được để trống."
+                                ForeColor="Red"
+                                CssClass="" />
 
                             <div class="mb-4">
                                 <label for="passInput">Password</label>
@@ -45,9 +61,16 @@
                                     <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3">
                                         <i class="bi bi-lock-fill"></i>
                                     </span>
-                                    <input type="password" style="max-width: 100% !important;" class="form-control border-0 bg-light rounded-end ps-1" id="passInput" placeholder="Password" />
+                                    <asp:TextBox ID="txtPass" runat="server" type="password" Style="max-width: 100% !important;" CssClass="form-control border-0 bg-light rounded-end ps-1" placeholder="Password" />
                                 </div>
                             </div>
+                            <asp:RequiredFieldValidator
+                                ID="RequiredFieldValidatorPass"
+                                runat="server"
+                                ControlToValidate="txtPass"
+                                ErrorMessage="Mật khẩu không được để trống."
+                                ForeColor="Red"
+                                CssClass="" />
 
                             <div class="mb-4">
                                 <label for="passConfirmInput">Confirm Password</label>
@@ -55,13 +78,37 @@
                                     <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3">
                                         <i class="bi bi-lock-fill"></i>
                                     </span>
-                                    <input type="password" style="max-width: 100% !important;" class="form-control border-0 bg-light rounded-end ps-1" id="passConfirmInput" placeholder="Password" />
+                                    <asp:TextBox ID="txtPassConfirm" runat="server" type="password" Style="max-width: 100% !important;" CssClass="form-control border-0 bg-light rounded-end ps-1" placeholder="Password" />
+                                </div>
+                            </div>
+                            <asp:RequiredFieldValidator
+                                ID="RequiredFieldValidatorPassConfirm"
+                                runat="server"
+                                ControlToValidate="txtPassConfirm"
+                                ErrorMessage="Mật khẩu không được để trống."
+                                ForeColor="Red"
+                                CssClass="" />
+                            <asp:CompareValidator
+                                ID="cvPasswordMatch"
+                                runat="server"
+                                ControlToValidate="txtPassConfirm"
+                                ControlToCompare="txtPass"
+                                ErrorMessage="Passwords do not match."
+                                ForeColor="Red"
+                                Operator="Equal" />
+                            <div class="mb-4">
+                                <label for="inputGroupRole">Role</label>
+                                <div class="input-group input-group-lg">
+                                    <asp:DropDownList Style="max-width: 100% !important;" CssClass="form-select" ID="inputGroupRole" runat="server">
+                                        <asp:ListItem Value="0" Text="Student" />
+                                        <asp:ListItem Value="1" Text="Instructor" />
+                                    </asp:DropDownList>
                                 </div>
                             </div>
 
                             <div class="align-items-center mt-0">
                                 <div class="d-grid">
-                                    <button class="btn btn-primary mb-0" type="button">Sign Up</button>
+                                    <asp:Button ID="btnSignUp" runat="server" Style="max-width: 100% !important;" CssClass="btn btn-primary mb-0" type="button" Text="SignUp" OnClick="btnSignUp_Click" />
                                 </div>
                             </div>
 

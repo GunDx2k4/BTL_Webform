@@ -41,35 +41,65 @@
         <%--HEADER--%>
         <nav class="navbar navbar-expand-md sticky-top bg-body border-bottom">
             <div class="container d-flex flex-wrap">
+                <a class="navbar-brand d-flex align-items-center" href="<%= ResolveUrl("~/") %>">
+                    <i class="bi bi-book-fill text-primary"></i>
+                    <span class="ms-2 h5 fw-bold text-dark">FitHou</span>
+                </a>
                 <ul class="nav me-auto">
-                    <li class="nav-item"><a href="/" class="nav-link link-body-emphasis px-2 active" aria-current="page">Home</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Features</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Pricing</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">FAQs</a></li>
-                    <li class="nav-item"><a href="/About" class="nav-link link-body-emphasis px-2">About</a></li>
+                    <li class="nav-item"><a href="<%= ResolveUrl("~/") %>" class="nav-link link-body-emphasis px-2 active" aria-current="page"><i class="bi bi-house-fill me-1"></i>Trang chủ</a></li>
+                    <li class="nav-item"><a href="Courses" class="nav-link link-body-emphasis px-2"><i class="bi bi-book-fill me-1"></i>Khóa học</a></li>
                 </ul>
                 <ul class="nav">
-                    <li class="dropdown" name="non-account" id="account" runat="server"></li>
                     <li class="nav-item">
                         <asp:MultiView ID="MultiViewNav" runat="server" ActiveViewIndex="0">
                             <asp:View ID="ViewLogin" runat="server">
-                                <a href="/Login" class="nav-link link-body-emphasis px-2">Login</a>
+                                <div class="dropdown-center text-end">
+                                    <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true">
+                                        <i class="bi bi-person-fill" width="50" height="50"></i>
+                                    </a>
+                                    <ul class="dropdown-menu text-small" data-popper-placement="bottom-end">
+                                        <li><a class="dropdown-item" href="Login">Đăng Nhập</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider" />
+                                        </li>
+                                        <li><a class="dropdown-item" href="SignUp">Đăng Ký</a></li>
+                                    </ul>
+                                </div>
                             </asp:View>
                             <asp:View ID="ViewLogout" runat="server">
-                                <div class="dropdown-center">
-                                    <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="bi bi-people">
-                                            <asp:Label CssClass="ps-2" ID="lblUser" runat="server" />
-                                        </i>
+                                <div class="dropdown-center text-end">
+                                    <a class="d-block link-body-emphasis text-decoration-none dropdown-toggle show" href="#" data-bs-toggle="dropdown" aria-expanded="true">
+                                        <i class="bi bi-person-fill" width="50" height="50"></i>
                                     </a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a class="dropdown-item" href="#">Profile</a>
+                                    <ul class="dropdown-menu text-small" data-popper-placement="bottom-end">
+                                        <li class="px-3">
+                                            <div class="d-flex align-items-center">
+                                                <div>
+                                                    <div class="h6 mt-2 mt-sm-0">
+                                                        <span class="fw-bold">User: </span>
+                                                        <asp:Label ID="lblUser" runat="server" />
+                                                    </div>
+                                                    <div class="small m-0">
+                                                        <span class="fw-bold">Email: </span>
+                                                        <asp:Label ID="lblEmail" runat="server" />
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#">
-                                                <asp:Button ID="btnLogout" class="btn btn-primary w-100 py-2" type="submit" runat="server" Text="Logout" OnClick="btnLogout_Click" />
-                                            </a>
+                                            <hr class="dropdown-divider" />
+                                        </li>
+                                        <li>
+                                            <asp:LinkButton ID="btnProfile" runat="server" CssClass="dropdown-item" OnClick="btnProfile_Click">
+                                                <i class="bi bi-person-fill"></i>
+                                                Profile
+                                            </asp:LinkButton>
+                                        </li>
+                                        <li>
+                                            <asp:LinkButton ID="btnLogout" runat="server" CssClass="dropdown-item" OnClick="btnLogout_Click">
+                                                <i class="bi bi-power"></i>
+                                                Logout
+                                            </asp:LinkButton>
                                         </li>
                                     </ul>
                                 </div>
@@ -130,7 +160,7 @@
 
                     <div class="col-md-4 mb-3">
                         <div class="mb-3">
-                            <h4>Acme Learning Management System</h4>
+                            <h4>FitHou Learning Management System</h4>
                             <ul class="list-unstyled small">
                                 <li class="mb-2"><b>Ngày thành lập:</b> 01/01/2024</li>
                                 <li class="mb-2"><b>Lĩnh vực hoạt động:</b> Giáo dục, công nghệ - lập trình. Chúng tôi tập trung xây dựng và phát triển các sản phẩm mang lại giá trị cho cộng đồng lập trình viên Việt Nam.</li>
