@@ -41,9 +41,9 @@ namespace BTL
         /// Hàm tạo <see cref="SqlConnection"/> từ <see cref="ConfigurationManager"/> ConnectionString "dbConnection"
         /// </summary>
         /// <returns><see cref="SqlConnection"/></returns>
-        public SqlConnection CreateConnection(string dataSource = "MyLaptop\\SQL_2022", string dataBase = "LMS")
+        public SqlConnection CreateConnection()
         {
-            string constr = $"Data Source={dataSource};Initial Catalog={dataBase};Integrated Security=True;Encrypt=False";
+            string constr = ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString;
             return new SqlConnection(constr);
         }
 
