@@ -21,7 +21,7 @@ namespace BTL
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        public global::System.Web.UI.WebControls.MultiView MultiViewNav;
+        protected global::System.Web.UI.WebControls.MultiView MultiViewNav;
 
         /// <summary>
         /// ViewLogin control.
@@ -58,6 +58,15 @@ namespace BTL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblEmail;
+
+        /// <summary>
+        /// lblRole control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRole;
 
         /// <summary>
         /// btnProfile control.

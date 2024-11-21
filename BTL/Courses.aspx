@@ -13,50 +13,46 @@
                             </button>
                         </div>
                     </div>
+                </div>
+                <div class="row g-4">
+                    <asp:Repeater ID="rptCategories" runat="server" OnItemDataBound="rptCategories_ItemDataBound">
+                        <ItemTemplate>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2 class="h5 mb-0"><%# ((BTL.Models.Category)Eval("Key")).Name %> </h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-4">
+                                        <asp:Repeater ID="rptCourses" runat="server">
+                                            <ItemTemplate>
+                                                <div class="col-md-4">
+                                                    <div class="card h-100 shadow-sm">
+                                                        <asp:Image ID="imgCourse" runat="server" ImageUrl='<%# "./Assets/" + "1.jpg"/*Eval("Img")*/ %>' CssClass="card-img-top" AlternateText="Course Image" />
+                                                        <div class="card-body">
+                                                            <span class="badge bg-primary mb-2"><%# Eval("Category") %></span>
+                                                            <h5 class="card-title">
+                                                                <asp:HyperLink ID="lnkCourseTitle" runat="server" NavigateUrl='<%# "CourseDetail.aspx?CourseID=" + Eval("Id") %>' CssClass="text-decoration-none">
+                                                                    <%# Eval("Name") %>
+                                                                </asp:HyperLink>
+                                                            </h5>
+                                                            <p class="card-text"><strong>Giảng viên:</strong> <%# Eval("Instructor") %> </p>
+                                                            <p class="card-text"><%# Eval("Description") %></p>
+                                                        </div>
 
-                    <div class="row g-4">
-                        <asp:Repeater ID="rptCards" runat="server">
-                            <ItemTemplate>
-                                <div class="col-sm-6 col-xl-4">
-                                    <div class="card shadow h-100">
-                                        <img src="https://placehold.co/600x450" class="card-img-top" />
-                                        <div class="card-body pb-0">
-                                            <div class="d-flex justify-content-between mb-2">
-                                                <span class="badge text-bg-primary">Web</span>
-                                            </div>
-                                            <h5 class="card-title"><a class="text-decoration-none" href="#">Build Responsive Websites with HTML</a></h5>
-                                            <h6 class="card-subtitle mb-2 text-body-secondary">Far advanced settling say finished raillery. Offered chiefly farther.</h6>
-                                        </div>
-
-                                        <div class="card-footer d-flex pt-2 pb-3">
-                                            <i class="bi bi-calendar-fill pe-2"></i>
-
-                                            <p class="m-0">
-                                                Start at 1/1/2024 - End 1/5/2024
-                                            </p>
-                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
                                     </div>
                                 </div>
-                            </ItemTemplate>
-                        </asp:Repeater>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-xl-3">
-                    <div class="offcanvas-body p-3 p-lg-0">
-                        <div class="card card-body shadow p-4 mb-4">
-                            <h4 class="mb-3">Category</h4>
-                            <div class="col-12">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="chkAll" />
-                                        <label class="form-check-label" for="chkAll">All</label>
-                                    </div>
-                                    <span class="small">(1256)</span>
+                                <div class="text-center mt-4 mb-4">
+                                    <asp:HyperLink ID="lnkCategory" runat="server" NavigateUrl='<%# "Courses.aspx?CategoryID=" + ((BTL.Models.Category)Eval("Key")).Id %>' CssClass="btn btn-primary view-more-btn">
+                                        Xem thêm
+                                    </asp:HyperLink>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
                 </div>
             </div>
 

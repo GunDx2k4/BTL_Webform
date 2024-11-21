@@ -8,7 +8,7 @@ namespace BTL.Enums
     public enum RoleUser
     {
         Student,
-        Teacher,
+        Instructor,
         Administrator
     }
 }

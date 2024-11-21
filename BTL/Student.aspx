@@ -1,96 +1,130 @@
 ﻿<%@ Page Title="Student" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Student.aspx.cs" Inherits="BTL.Student" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container">
+    <div class="container py-2">
         <div class="row">
-            <div class="col-12 mb-2">
-                <div class="card bg-transparent card-body pb-0 px-0 mt-2 mt-sm-0">
-                    <div class="row d-sm-flex justify-sm-content-between mt-2 mt-md-0">
-                        <div class="col d-sm-flex justify-content-between align-items-center">
-                            <div>
-                                <h1 class="my-1 fs-4">Lori Stevens</h1>
-                                <ul class="list-inline mb-0">
-                                    <li class="list-inline-item me-3 mb-1 mb-sm-0">
-                                        <span class="h6">123</span>
-                                        <span class="text-body fw-light">Courses</span>
-                                    </li>
-                                </ul>
-                            </div>
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-2 mt-4">
+                <div class="d-flex align-items-center mb-3 mb-md-0">
+                    <img src="https://placehold.co/80x80" class="rounded-circle me-3">
+                    <div>
+                        <h1 class="h3 fw-bold">
+                            <asp:Label ID="lblStudentName" runat="server" />
+                        </h1>
+                        <p class="text-muted">
+                            <asp:Label ID="lblStudentEmail" runat="server" />
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h6 class="card-title">Khóa học đăng ký</h6>
+                            <p class="card-text fs-3 fw-bold">
+                                <asp:Label ID="lblTotalCourses" runat="server" />
+                            </p>
                         </div>
                     </div>
                 </div>
-
             </div>
-            <div class="col-12">
-                <div class="card bg-transparent border rounded-3">
-                    <div class="card-header bg-transparent border-bottom">
-                        <h3 class="mb-0">My Courses List</h3>
+            <div class="py-5">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title mb-1">Lịch học</h5>
+                            <p class="card-text text-muted">Xem lịch học tuần này</p>
+                        </div>
                     </div>
                     <div class="card-body">
-                        <div class="row g-3 align-items-center justify-content-between mb-4">
-                            <div class="col-md-8">
-                                <div class="rounded position-relative">
-                                    <input class="form-control pe-5 bg-transparent" style="max-width: 100% !important;" type="search" placeholder="Search" />
-                                    <button class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset" type="submit">
-                                        <i class="bi bi-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="btn-group">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-                                        Sort by
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Menu item</a></li>
-                                        <li><a class="dropdown-item" href="#">Menu item</a></li>
-                                        <li><a class="dropdown-item" href="#">Menu item</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="table-responsive border-0">
-                            <table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col" class="border-0 rounded-start">Course Title</th>
-                                        <th scope="col" class="border-0">Total Lectures</th>
-                                        <th scope="col" class="border-0">Completed Lecture</th>
-                                        <th scope="col" class="border-0 rounded-end">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <div>
-                                                    <img style="width: 100px !important;" src="https://placehold.co/600x450" class="rounded" />
-                                                </div>
-                                                <div class="mb-0 ms-2">
-                                                    <h6 class="table-responsive-title">
-                                                        <a href="#">Building Scalable APIs with GraphQL</a>
-                                                    </h6>
-                                                    <div class="overflow-hidden">
-                                                        <h6 class="mb-0 text-end">75%</h6>
-                                                        <div class="progress bg-primary bg-opacity-10">
-                                                            <div class="progress-bar bg-primary aos aos-init aos-animate" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                        <div class="row row-cols-7 row-cols-md-7 g-3" id="week-days">
+                            <asp:Repeater ID="rptSchedule" runat="server" OnItemDataBound="rptSchedule_ItemDataBound">
+                                <ItemTemplate>
+                                    <div class="col">
+                                        <div class="card h-100">
+                                            <div class="card-header text-center">
+                                                <%# Eval("Date") %>
+                                                <p class="text-muted">
+                                                    <%# Eval("DayOfWeek") %>
+                                                </p>
                                             </div>
-                                        </td>
-                                        <td>5</td>
-                                        <td>5</td>
-                                        <td><a class="btn btn-sm btn-primary-soft me-1 mb-1 mb-md-0">Continue</a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                            <div class="card-body">
+                                                <asp:Repeater ID="rptScheduleDetail" runat="server">
+                                                    <ItemTemplate>
+                                                        <div class="mb-3 p-2 bg-light rounded">
+                                                            <h6 class='fw-bold mb-1'><%# Eval("NameCourse")  %></h6>
+                                                            <p class='text-muted mb-1'><%# Eval("Lecture")  %></p>
+
+                                                            <p class="text-muted mb-1">
+                                                                <i class='bi bi-clock'></i><%# Eval("StatTime")  %> - <%# Eval("EndTime")  %>
+                                                            </p>
+                                                            <p class="text-muted">
+                                                                Giảng viên: <%# Eval("Instructor")  %>
+                                                            </p>
+                                                            <p class="text-muted">
+                                                                Trạng thái: <%# Eval("Status") %>
+                                                        </div>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ItemTemplate>
+                            </asp:Repeater>
+
                         </div>
                     </div>
                 </div>
+            </div>
 
+
+            <div class="col-12">
+                <div class="container py-5">
+                    <h1 class="text-center mb-4">Khóa học đã đăng ký</h1>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6 mb-2">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-search"></i></span>
+                                <input type="text" id="searchInput" class="form-control" placeholder="Search courses...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-4">
+                        <asp:Repeater ID="rptCategories" runat="server" OnItemDataBound="rptCategories_ItemDataBound">
+                            <ItemTemplate>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h2 class="h5 mb-0"><%# ((BTL.Models.Category)Eval("Key")).Name %> </h2>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row g-4">
+                                            <asp:Repeater ID="rptCourses" runat="server">
+                                                <ItemTemplate>
+                                                    <div class="col-md-4">
+                                                        <div class="card h-100 shadow-sm">
+                                                            <asp:Image ID="imgCourse" runat="server" ImageUrl='<%# "./Assets/" + "1.jpg"/*Eval("Img")*/ %>' CssClass="card-img-top" AlternateText="Course Image" />
+                                                            <div class="card-body">
+                                                                <span class="badge bg-primary mb-2"><%# Eval("Category") %></span>
+                                                                <h5 class="card-title">
+                                                                    <asp:HyperLink ID="lnkCourseTitle" runat="server" NavigateUrl='<%# "CourseDetail.aspx?CourseID=" + Eval("Id") %>' CssClass="text-decoration-none">
+                                                                            <%# Eval("Name") %>
+                                                                    </asp:HyperLink>
+                                                                </h5>
+                                                                <p class="card-text"><strong>Giảng viên:</strong> <%# Eval("Instructor") %></p>
+                                                                <p class="card-text"><%# Eval("Description") %></p>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
