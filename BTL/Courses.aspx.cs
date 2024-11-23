@@ -1,5 +1,6 @@
 ﻿using BTL.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -23,16 +24,16 @@ namespace BTL
             }
         }
 
-        private void LoadCourses(int id = -1)
+        private void LoadCourses(int id = -1, string name = null)
         {
             DataTable data;
             if (id != -1)
             {
-                data = DBConnection.Instance.SelectDB("vCourse", $"iIDCategory={id}");
+                data = DBConnection.Instance.SelectDB("vCourse", $"iIDCategory={id}" + (!string.IsNullOrEmpty(name) ? $" AND sNameCourse LIKE '%{name}%'" : string.Empty));
             }
             else
             {
-                data = DBConnection.Instance.SelectDB("vCourse");
+                data = DBConnection.Instance.SelectDB("vCourse", (!string.IsNullOrEmpty(name) ? $" sNameCourse LIKE '%{name}%'" : string.Empty));
             }
 
             Dictionary<Category, List<Course>> pairs = new Dictionary<Category, List<Course>>();
@@ -85,6 +86,16 @@ namespace BTL
             }
         }
 
-
+        protected void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (Request.QueryString["CategoryID"] == null)
+            {
+                LoadCourses(name: txtSearch.Text);
+            }
+            else
+            {
+                LoadCourses(int.Parse(Request.QueryString["CategoryID"]), txtSearch.Text);
+            }
+        }
     }
 }

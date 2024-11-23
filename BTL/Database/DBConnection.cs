@@ -194,7 +194,7 @@ namespace BTL
 
             foreach (DataRow row in _dataSet.Tables[table].Rows)
             {
-                if (row[sourceColumn].Equals(value))
+                if (row[sourceColumn].ToString().Contains(value.ToString()))
                     return row;
             }
             return null;
@@ -212,11 +212,7 @@ namespace BTL
         /// <returns><c>True</c> Nếu cập nhật thành công, ngược lại <c>False</c></returns>
         public bool UpdateDB(string table, SqlParameter condition, params SqlParameter[] sqlParameters)
         {
-            DataTable dt = _dataSet.Tables[table];
-            if (_dataSet.Tables[table] == null)
-            {
-                dt = SelectDB(table);
-            }
+            if (_dataSet.Tables[table] == null) SelectDB(table);
 
             using (SqlConnection cnn = CreateConnection())
             {

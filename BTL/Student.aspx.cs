@@ -24,7 +24,7 @@ namespace BTL
 
         }
 
-        void BindingAll()
+        void BindingAll(string name = null)
         {
             var tableCourses = DBConnection.Instance.SelectDB("tblStudentCourse", $"FK_iIDUser={Session["ID"]}");
 
@@ -37,7 +37,7 @@ namespace BTL
             }
             if (idCourses.Count > 0)
             {
-                var data = DBConnection.Instance.SelectDB("vCourse", $"iIDCourse IN ({string.Join(",", idCourses)})");
+                var data = DBConnection.Instance.SelectDB("vCourse", $"iIDCourse IN ({string.Join(",", idCourses)})" + (!string.IsNullOrEmpty(name) ? $" AND sNameCourse LIKE '%{name}%'" : string.Empty));
                 BindingCourse(data);
             }
 
@@ -184,5 +184,6 @@ namespace BTL
 
             BindingAll();
         }
+
     }
 }

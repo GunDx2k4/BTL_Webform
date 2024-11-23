@@ -85,14 +85,6 @@
                 <div class="container py-5">
                     <h1 class="text-center mb-4">Khóa học đang dạy</h1>
 
-                    <div class="row mb-4">
-                        <div class="col-md-6 mb-2">
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="bi bi-search"></i></span>
-                                <input type="text" id="searchInput" class="form-control" placeholder="Tìm khóa học...">
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="row g-4">
                         <asp:Repeater ID="rptCategories" runat="server" OnItemDataBound="rptCategories_ItemDataBound">

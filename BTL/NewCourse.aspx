@@ -45,9 +45,11 @@
                         <h5 class="card-title">Hình ảnh khóa học</h5>
                     </div>
                     <div class="card-body text-center">
+                        <asp:Image ID="imgCourse" runat="server" CssClass="card-img-top" AlternateText="Course Image" />
                         <div class="border border-dashed rounded p-4">
                             <label for="fuImage" class="form-label d-flex justify-content-center mb-3">
                                 <asp:FileUpload ID="fuImage" runat="server" CssClass="form-control" accept="image/*" />
+                                <asp:Button ID="btnSaveImage" runat="server" CssClass="btn btn-sm btn-primary mb-2" Text="Lưu" OnClick="btnSaveImage_Click" />
                             </label>
                             <small class="text-muted d-block">Chỉ hỗ trợ các tệp JPG, JPEG và PNG. Kích thước đề xuất: 600 × 450px.
                             </small>

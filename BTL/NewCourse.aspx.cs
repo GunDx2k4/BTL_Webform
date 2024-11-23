@@ -11,7 +11,6 @@ namespace BTL
 {
     public partial class NewCourse : System.Web.UI.Page
     {
-        private string _pathImg = "1.jpg";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!(bool)Session["Login"] && ((RoleUser)Session["Role"]) != RoleUser.Instructor)
@@ -53,7 +52,7 @@ namespace BTL
             txtTitle.DataBind();
             txtDescription.Text = data.Field<string>("sDescription");
             txtDescription.DataBind();
-            _pathImg = data.Field<string>("sImage");
+            imgCourse.ImageUrl = "./Assets/" + data.Field<string>("sImage");
         }
 
         void BindingLecture()
@@ -90,6 +89,7 @@ namespace BTL
             else
             {
                 id = int.Parse(Request.QueryString["CourseID"]);
+                UpdateCourse();
             }
             var lectures = (Session["Lectures"] as List<Lecture>);
             foreach (var lecture in lectures)
@@ -172,14 +172,25 @@ namespace BTL
         {
             if (fuImage.HasFile)
             {
-                _pathImg = Path.GetFileName(fuImage.FileName);
-                string uploadPath = Server.MapPath("~/Assets/") + _pathImg;
+                string uploadPath = Server.MapPath("~/Assets/") + Path.GetFileName(fuImage.FileName);
                 fuImage.SaveAs(uploadPath);
+                imgCourse.ImageUrl = "./Assets/" + Path.GetFileName(fuImage.FileName);
             }
             return DBConnection.Instance.InsertDB("tblCourse",
                 DBConnection.Instance.BuildParameter("@sName", SqlDbType.NVarChar, 100, "sName", txtTitle.Text),
                 DBConnection.Instance.BuildParameter("@sDescription", SqlDbType.NVarChar, 255, "sDescription", txtDescription.Text),
-                DBConnection.Instance.BuildParameter("@sImage", SqlDbType.VarChar, 100, "sImage", _pathImg),
+                DBConnection.Instance.BuildParameter("@sImage", SqlDbType.VarChar, 100, "sImage", Path.GetFileName(imgCourse.ImageUrl)),
+                DBConnection.Instance.BuildParameter("@FK_iIDInstructor", SqlDbType.Int, 0, "FK_iIDInstructor", Session["ID"]),
+                DBConnection.Instance.BuildParameter("@FK_iIDCategory", SqlDbType.Int, 0, "FK_iIDCategory", ddlCategories.SelectedValue));
+        }
+
+        bool UpdateCourse()
+        {
+            return DBConnection.Instance.UpdateDB("tblCourse",
+                DBConnection.Instance.BuildParameter("@PK_iID", SqlDbType.Int, 0, "PK_iID", Request.QueryString["CourseID"]),
+                DBConnection.Instance.BuildParameter("@sName", SqlDbType.NVarChar, 100, "sName", txtTitle.Text),
+                DBConnection.Instance.BuildParameter("@sDescription", SqlDbType.NVarChar, 255, "sDescription", txtDescription.Text),
+                DBConnection.Instance.BuildParameter("@sImage", SqlDbType.VarChar, 100, "sImage", Path.GetFileName(imgCourse.ImageUrl)),
                 DBConnection.Instance.BuildParameter("@FK_iIDInstructor", SqlDbType.Int, 0, "FK_iIDInstructor", Session["ID"]),
                 DBConnection.Instance.BuildParameter("@FK_iIDCategory", SqlDbType.Int, 0, "FK_iIDCategory", ddlCategories.SelectedValue));
         }
@@ -246,6 +257,16 @@ namespace BTL
                 {
                     ddlStatus.SelectedValue = lecture.Status.ToString();
                 }
+            }
+        }
+
+        protected void btnSaveImage_Click(object sender, EventArgs e)
+        {
+            if (fuImage.HasFile)
+            {
+                string uploadPath = Server.MapPath("~/Assets/") + Path.GetFileName(fuImage.FileName);
+                fuImage.SaveAs(uploadPath);
+                imgCourse.ImageUrl = "./Assets/" + Path.GetFileName(fuImage.FileName);
             }
         }
     }

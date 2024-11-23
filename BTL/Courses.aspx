@@ -7,10 +7,7 @@
                 <div class="col-lg-8 col-xl-9">
                     <div class="row mb-4 align-items-center">
                         <div class="input-group input-borderless">
-                            <input class="form-control me-1" style="max-width: 100% !important;" type="search" placeholder="Find your course" />
-                            <button class="btn btn-primary mb-0 rounded z-index-1" type="button">
-                                <i class="bi bi-search"></i>
-                            </button>
+                            <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control me-1" Style="max-width: 100% !important;" type="search" placeholder="Tìm khóa học" OnTextChanged="txtSearch_TextChanged" />
                         </div>
                     </div>
                 </div>
@@ -27,7 +24,7 @@
                                             <ItemTemplate>
                                                 <div class="col-md-4">
                                                     <div class="card h-100 shadow-sm">
-                                                        <asp:Image ID="imgCourse" runat="server" ImageUrl='<%# "./Assets/" + Eval("Img") %>' CssClass="card-img-top" AlternateText="Course Image" />
+                                                        <asp:Image ID="imgCourse" runat="server" ImageUrl='<%# "./Assets/" + Eval("Img")%>' CssClass="card-img-top" AlternateText="Course Image" />
                                                         <div class="card-body">
                                                             <span class="badge bg-primary mb-2"><%# Eval("Category") %></span>
                                                             <h5 class="card-title">

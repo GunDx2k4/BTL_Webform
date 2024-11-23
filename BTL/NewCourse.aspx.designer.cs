@@ -60,6 +60,15 @@ namespace BTL
         protected global::System.Web.UI.WebControls.DropDownList ddlCategories;
 
         /// <summary>
+        /// imgCourse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgCourse;
+
+        /// <summary>
         /// fuImage control.
         /// </summary>
         /// <remarks>
@@ -67,6 +76,15 @@ namespace BTL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload fuImage;
+
+        /// <summary>
+        /// btnSaveImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSaveImage;
 
         /// <summary>
         /// btnAddLecture control.
