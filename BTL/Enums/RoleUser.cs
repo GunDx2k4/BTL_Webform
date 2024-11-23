@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace BTL.Enums
+﻿namespace BTL.Enums
 {
     public enum RoleUser
     {
         Student,
         Instructor,
-        Administrator
+        Administrator,
+        Anonymous
     }
 }

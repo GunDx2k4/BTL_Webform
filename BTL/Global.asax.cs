@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BTL.Enums;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace BTL
         void Session_Start(object sender, EventArgs e)
         {
             Session["Login"] = false;
-            Session["Role"] = string.Empty;
+            Session["Role"] = RoleUser.Anonymous;
             Session["Account"] = string.Empty;
             Session["Password"] = string.Empty;
         }

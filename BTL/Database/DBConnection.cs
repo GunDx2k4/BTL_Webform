@@ -106,6 +106,8 @@ namespace BTL
         /// <returns><c>True</c> Nếu thêm thành công, ngược lại <c>False</c></returns>
         public bool InsertDB(string table, params SqlParameter[] sqlParameters)
         {
+            if (_dataSet.Tables[table] == null) SelectDB(table);
+
             using (SqlConnection cnn = CreateConnection())
             {
                 using (SqlDataAdapter da = new SqlDataAdapter())
@@ -255,9 +257,31 @@ namespace BTL
         /// <returns></returns>
         public bool DeleteDB(string table, SqlParameter condition)
         {
-            return UpdateDB(table,
-                condition,
-                BuildParameter("@bDeleted", SqlDbType.Bit, 0, "bDeleted", true));
+            using (SqlConnection cnn = CreateConnection())
+            {
+                using (SqlDataAdapter da = new SqlDataAdapter())
+                {
+                    using (SqlCommand cmd = cnn.BuildDeleteCommand(table, condition))
+                    {
+                        try
+                        {
+                            da.DeleteCommand = cmd;
+                            cnn.Open();
+
+                            var row = GetRow(table, condition.SourceColumn, condition.Value);
+                            row.Delete();
+                            int i = da.Update(_dataSet, table);
+                            cnn.Close();
+                            return i > 0;
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new Exception("Lỗi delete DataBase : " + ex.Message);
+                        }
+                    }
+
+                }
+            }
         }
     }
 }

@@ -7,32 +7,30 @@ using System.Web.UI.WebControls;
 
 namespace BTL
 {
-    public partial class Student : System.Web.UI.Page
+    public partial class Instructor : System.Web.UI.Page
     {
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!(bool)Session["Login"] && ((RoleUser)Session["Role"]) != RoleUser.Student)
+
+            if (!(bool)Session["Login"] && ((RoleUser)Session["Role"]) != RoleUser.Instructor)
             {
                 Response.Redirect("~/");
                 return;
             }
-            lblStudentName.Text = Session["User"].ToString();
-            lblStudentEmail.Text = Session["Email"].ToString();
-
+            lblInstructorName.Text = Session["User"].ToString();
+            lblInstructorEmail.Text = Session["Email"].ToString();
             BindingAll();
-
         }
 
         void BindingAll()
         {
-            var tableCourses = DBConnection.Instance.SelectDB("tblStudentCourse", $"FK_iIDUser={Session["ID"]}");
+            var tableCourses = DBConnection.Instance.SelectDB("tblCourse", $"FK_iIDInstructor={Session["ID"]}");
 
             lblTotalCourses.Text = tableCourses.Rows.Count.ToString();
             List<int> idCourses = new List<int>();
             foreach (DataRow row in tableCourses.Rows)
             {
-                idCourses.Add(row.Field<int>("FK_iIDCourse"));
+                idCourses.Add(row.Field<int>("PK_iID"));
 
             }
             if (idCourses.Count > 0)
@@ -43,6 +41,7 @@ namespace BTL
 
             BindingSchedule(idCourses);
         }
+
         void BindingCourse(DataTable data)
         {
             Dictionary<Category, List<Course>> pairs = new Dictionary<Category, List<Course>>();
@@ -120,7 +119,7 @@ namespace BTL
             switch (status)
             {
                 case 0:
-                    return "Học";
+                    return "Dạy";
                 case 1:
                     return "Kết thúc";
                 case 2:
@@ -159,17 +158,16 @@ namespace BTL
         protected void btnDeleteCourse_Click(object sender, EventArgs e)
         {
             int idCourse = int.Parse(((Button)sender).CommandArgument);
-            var id = DBConnection.Instance.SelectDB("tblStudentCourse", $"FK_iIDUser={Session["ID"]} AND FK_iIDCourse={idCourse}").Rows[0].Field<int>("PK_iID");
 
-            if (DBConnection.Instance.DeleteDB("tblStudentCourse",
-                DBConnection.Instance.BuildParameter("@PK_iID", SqlDbType.Int, 0, "PK_iID", id)
+            if (DBConnection.Instance.DeleteDB("tblCourse",
+                DBConnection.Instance.BuildParameter("@PK_iID", SqlDbType.Int, 0, "PK_iID", idCourse)
                 ))
             {
-                Master.Message.Text = "Hủy khóa học thành công.";
+                Master.Message.Text = "Xóa khóa học thành công.";
             }
             else
             {
-                Master.Message.Text = "Hủy khóa học không thành công.";
+                Master.Message.Text = "Xóa khóa học không thành công.";
             }
 
             Master.modalPlaceHolder.Controls.Add(new Literal

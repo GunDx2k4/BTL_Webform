@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BTL.Enums;
+using System;
 using System.Data;
 using System.Web.UI.WebControls;
 
@@ -41,6 +42,21 @@ namespace BTL
                 Response.Redirect("Login");
                 return;
             }
+            if ((RoleUser)Session["Role"] != RoleUser.Student)
+            {
+
+                Master.Message.Text = "Bạn không có quyền đăng ký.";
+                Master.modalPlaceHolder.Controls.Add(new Literal
+                {
+                    Text = @"
+                        <script type='text/javascript'>
+                            $(document).ready(function(){
+                                $('#myModal').modal('show');
+                            });
+                        </script>"
+                });
+                return;
+            }
 
             var tableCourses = DBConnection.Instance.SelectDB("tblStudentCourse", $"FK_iIDUser={Session["ID"]}");
             foreach (DataRow row in tableCourses.Rows)
@@ -76,7 +92,26 @@ namespace BTL
                             });
                         </script>"
                 });
-                Response.Redirect("Student");
+                Master.Message.Text = "Đăng ký thành công, quay lại trang lịch học sau <span id='countdown' class=\"fw-semibold\">3</span>s";
+                Master.modalPlaceHolder.Controls.Add(new Literal
+                {
+                    Text = @"
+                    <script type='text/javascript'>
+                        $(document).ready(function(){
+                            $('#myModal').modal('show');
+                            var seconds = 3;
+                            var countdownInterval = setInterval(function () {
+                                seconds--;
+                                document.getElementById('countdown').innerText = seconds;
+                                if (seconds <= 0) {
+                                    clearInterval(countdownInterval);
+                                    window.location.href = 'Student';
+                                }
+                            }, 1000);
+                        });
+                        
+                    </script>"
+                });
             }
             else
             {

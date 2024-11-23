@@ -49,6 +49,19 @@ CREATE TABLE tblAssignment (
     sUrl VARCHAR(255),
     FOREIGN KEY (FK_iIDLecture) REFERENCES tblLecture(PK_iID))
 
+GO
+CREATE OR ALTER TRIGGER trg_DeleteCourse ON tblCourse
+INSTEAD OF DELETE
+AS
+BEGIN
+	DECLARE @iID int
+	SELECT @iID = PK_iID FROM DELETED 
+    DELETE FROM tblLecture WHERE FK_iIDCourse = @iID
+    DELETE FROM tblStudentCourse WHERE FK_iIDCourse = @iID
+    DELETE FROM tblCourse WHERE PK_iID = @iID
+END
+
+
 INSERT INTO tblUser (sUsername, sPassword, iRole, sEmail)
 VALUES 
 (N'Nguyễn Văn A', '1', 0, 'test1@gmail.com'), -- Student
@@ -89,12 +102,44 @@ VALUES
 (N'Bài tập Python', N'Hoàn thành các bài tập lập trình Python.', 2, '2024-12-02 23:59:59', 'http://lms.com/baitap/python_baitap'),
 (N'Đề xuất Dự án Học Máy', N'Nộp đề xuất cho dự án học máy của bạn.', 3, '2024-12-03 23:59:59', 'http://lms.com/baitap/ml_dexuat');
 
+
+
+GO
+CREATE OR ALTER VIEW vCountStudent AS
+SELECT iIDCourse, sNameCourse, (CASE WHEN COUNT(tblStudentCourse.PK_iID) > 0 THEN COUNT(tblStudentCourse.PK_iID) ELSE 0 END) AS 'iTotalStudent'
+FROM vCourse LEFT JOIN tblStudentCourse ON iIDCourse = tblStudentCourse.FK_iIDCourse GROUP BY iIDCourse, sNameCourse, sNameCategory
+
+GO
+CREATE OR ALTER VIEW vCountLecture AS
+SELECT iIDCourse, sNameCourse, (CASE WHEN COUNT(tblLecture.PK_iID) > 0 THEN COUNT(tblLecture.PK_iID) ELSE 0 END) AS 'iTotalLecture'
+FROM vCourse LEFT JOIN tblLecture ON iIDCourse = tblLecture.FK_iIDCourse GROUP BY iIDCourse, sNameCourse, sNameCategory
+
+GO
+CREATE OR ALTER VIEW vCountCourse AS
+SELECT vCountStudent.iIDCourse, vCountStudent.sNameCourse, vCourse.sNameCategory, vCourse.sNameInstructor, vCountLecture.iTotalLecture, vCountStudent.iTotalStudent
+FROM vCountStudent LEFT JOIN vCountLecture ON vCountStudent.iIDCourse = vCountLecture.iIDCourse LEFT JOIN vCourse ON vCountStudent.iIDCourse = vCourse.iIDCourse
+
 GO
 CREATE OR ALTER VIEW vCourse AS
-SELECT tblCourse.PK_iID AS 'iIDCourse', tblCategory.PK_iID AS 'iIDCategory', tblCategory.sName AS 'sNameCategory', tblCourse.sName AS 'sNameCourse', tblUser.sUsername AS 'sNameInstructor', tblCourse.sDescription, tblCourse.sImage
+SELECT tblCourse.PK_iID AS 'iIDCourse', tblCategory.PK_iID AS 'iIDCategory', tblCategory.sName AS 'sNameCategory', tblCourse.sName AS 'sNameCourse', tblUser.PK_iID AS 'iIDInstructor', tblUser.sUsername AS 'sNameInstructor', tblCourse.sDescription, tblCourse.sImage
 FROM tblCourse INNER JOIN tblCategory ON tblCourse.FK_iIDCategory = tblCategory.PK_iID INNER JOIN tblUser ON tblUser.PK_iID = tblCourse.FK_iIDInstructor
 
 GO
 CREATE OR ALTER VIEW vLecture AS
-SELECT iIDCourse, sNameCourse, sNameInstructor, sName AS 'sNameLecture', dStart, dEnd, iStatus
+SELECT iIDCourse, sNameCourse, sNameInstructor, sName AS 'sNameLecture', dStart, dEnd, iStatus, sUrl
 FROM tblLecture INNER JOIN vCourse ON tblLecture.FK_iIDCourse = vCourse.iIDCourse
+
+GO
+CREATE OR ALTER VIEW vStudent AS
+SELECT tblUser.PK_iID AS 'iIDStudent', tblUser.sUsername AS 'sNameStudent', tblUser.sEmail, (CASE WHEN COUNT(tblStudentCourse.PK_iID) > 0 THEN COUNT(tblStudentCourse.PK_iID) ELSE 0 END) AS 'iTotalCourse'
+FROM tblUser LEFT JOIN tblStudentCourse ON tblUser.PK_iID = tblStudentCourse.FK_iIDUser WHERE tblUser.iRole = 0 GROUP BY tblUser.PK_iID, tblUser.sUsername, tblUser.sEmail
+
+GO
+CREATE OR ALTER VIEW vInstructor AS
+SELECT tblUser.PK_iID AS 'iIDInstructor', tblUser.sUsername AS 'sNameInstructor', tblUser.sEmail, (CASE WHEN COUNT(tblCourse.PK_iID) > 0 THEN COUNT(tblCourse.PK_iID) ELSE 0 END) AS 'iTotalCourse'
+FROM tblUser LEFT JOIN tblCourse ON tblUser.PK_iID = tblCourse.FK_iIDInstructor WHERE tblUser.iRole = 1 GROUP BY tblUser.PK_iID, tblUser.sUsername, tblUser.sEmail
+
+GO
+CREATE OR ALTER VIEW vCategory AS
+SELECT tblCategory.PK_iID AS 'iIDCategory', tblCategory.sName AS 'sNameCategory', (CASE WHEN COUNT(tblCourse.PK_iID) > 0 THEN COUNT(tblCourse.PK_iID) ELSE 0 END) AS 'iTotalCourse'
+FROM tblCategory LEFT JOIN tblCourse ON tblCategory.PK_iID = tblCourse.FK_iIDCategory GROUP BY tblCategory.PK_iID, tblCategory.sName

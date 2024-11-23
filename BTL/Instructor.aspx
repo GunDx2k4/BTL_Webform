@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Student" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Student.aspx.cs" Inherits="BTL.Student" %>
+﻿<%@ Page Title="Instructor" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Instructor.aspx.cs" Inherits="BTL.Instructor" %>
 
 <%@ MasterType VirtualPath="~/Site.Master" %>
 
@@ -10,30 +10,36 @@
                     <img src="https://placehold.co/80x80" class="rounded-circle me-3">
                     <div>
                         <h1 class="h3 fw-bold">
-                            <asp:Label ID="lblStudentName" runat="server" />
+                            <asp:Label ID="lblInstructorName" runat="server" />
                         </h1>
                         <p class="text-muted">
-                            <asp:Label ID="lblStudentEmail" runat="server" />
+                            <asp:Label ID="lblInstructorEmail" runat="server" />
                         </p>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="card">
                         <div class="card-body text-center">
-                            <h6 class="card-title">Khóa học đăng ký</h6>
+                            <h6 class="card-title">Khóa học đang dạy</h6>
                             <p class="card-text fs-3 fw-bold">
                                 <asp:Label ID="lblTotalCourses" runat="server" />
                             </p>
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-2 col-md-2">
+                    <asp:HyperLink ID="lnkCreateCourse" runat="server" NavigateUrl="NewCourse" CssClass="btn btn-primary view-more-btn">
+                        Tạo khóa học mới
+                    </asp:HyperLink>
+                </div>
+
             </div>
             <div class="py-5">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <div>
-                            <h5 class="card-title mb-1">Lịch học</h5>
-                            <p class="card-text text-muted">Xem lịch học tuần này</p>
+                            <h5 class="card-title mb-1">Lịch dạy</h5>
+                            <p class="card-text text-muted">Xem lịch dạy tuần này</p>
                         </div>
                     </div>
                     <div class="card-body">
@@ -59,9 +65,6 @@
                                                                 <%# Eval("StatTime")  %> - <%# Eval("EndTime")  %>
                                                             </p>
                                                             <p class="text-muted">
-                                                                Giảng viên: <%# Eval("Instructor")  %>
-                                                            </p>
-                                                            <p class="text-muted">
                                                                 Trạng thái: <%# Eval("Status") %>
                                                         </div>
                                                     </ItemTemplate>
@@ -80,13 +83,13 @@
 
             <div class="col-12">
                 <div class="container py-5">
-                    <h1 class="text-center mb-4">Khóa học đã đăng ký</h1>
+                    <h1 class="text-center mb-4">Khóa học đang dạy</h1>
 
                     <div class="row mb-4">
                         <div class="col-md-6 mb-2">
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-search"></i></span>
-                                <input type="text" id="searchInput" class="form-control" placeholder="Search courses...">
+                                <input type="text" id="searchInput" class="form-control" placeholder="Tìm khóa học...">
                             </div>
                         </div>
                     </div>
@@ -104,18 +107,21 @@
                                                 <ItemTemplate>
                                                     <div class="col-md-4">
                                                         <div class="card h-100 shadow-sm">
-                                                            <asp:Image ID="imgCourse" runat="server" ImageUrl='<%# "./Assets/" + "1.jpg"/*Eval("Img")*/ %>' CssClass="card-img-top" AlternateText="Course Image" />
+                                                            <asp:Image ID="imgCourse" runat="server" ImageUrl='<%# "./Assets/" + Eval("Img") %>' CssClass="card-img-top" AlternateText="Course Image" />
                                                             <div class="card-body">
                                                                 <span class="badge bg-primary mb-2"><%# Eval("Category") %></span>
                                                                 <h5 class="card-title">
-                                                                    <asp:HyperLink ID="lnkCourseTitle" runat="server" NavigateUrl='<%# "CourseDetail.aspx?CourseID=" + Eval("Id") %>' CssClass="text-decoration-none">
-                                                                            <%# Eval("Name") %>
+                                                                    <asp:HyperLink ID="lnkCourseTitle" runat="server" NavigateUrl='<%# "CourseDetail?CourseID=" + Eval("Id") %>' CssClass="text-decoration-none">
+                                                                         <%# Eval("Name") %>
                                                                     </asp:HyperLink>
                                                                 </h5>
                                                                 <p class="card-text"><strong>Giảng viên:</strong> <%# Eval("Instructor") %></p>
                                                                 <p class="card-text"><%# Eval("Description") %></p>
                                                             </div>
                                                             <div class="card-footer">
+                                                                <asp:HyperLink ID="linkEdit" runat="server" NavigateUrl='<%# "NewCourse?CourseID=" + Eval("Id") %>' CssClass="btn btn-outline-secondary me-2">
+                                                                    Chỉnh sửa
+                                                                </asp:HyperLink>
                                                                 <asp:Button ID="btnDeleteCourse" runat="server" CssClass="btn btn-sm btn-outline-danger" Text="Hủy" OnClick="btnDeleteCourse_Click" CommandArgument='<%# Eval("Id") %>' />
                                                             </div>
                                                         </div>
@@ -133,3 +139,4 @@
         </div>
     </div>
 </asp:Content>
+

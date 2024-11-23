@@ -120,5 +120,13 @@ namespace BTL
             cmd.Parameters.AddWithValue(condition.ParameterName, condition.Value);
             return cmd;
         }
+
+        public static SqlCommand BuildDeleteCommand(this SqlConnection conn, string table, SqlParameter condition)
+        {
+            string sqlUpdate = $"DELETE FROM {table} WHERE {condition.SourceColumn}={condition.ParameterName}";
+            var cmd = new SqlCommand(sqlUpdate, conn);
+            cmd.Parameters.AddWithValue(condition.ParameterName, condition.Value);
+            return cmd;
+        }
     }
 }

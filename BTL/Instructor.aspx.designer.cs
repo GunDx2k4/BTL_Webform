@@ -11,26 +11,26 @@ namespace BTL
 {
 
 
-    public partial class Student
+    public partial class Instructor
     {
 
         /// <summary>
-        /// lblStudentName control.
+        /// lblInstructorName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStudentName;
+        protected global::System.Web.UI.WebControls.Label lblInstructorName;
 
         /// <summary>
-        /// lblStudentEmail control.
+        /// lblInstructorEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStudentEmail;
+        protected global::System.Web.UI.WebControls.Label lblInstructorEmail;
 
         /// <summary>
         /// lblTotalCourses control.
@@ -40,6 +40,15 @@ namespace BTL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTotalCourses;
+
+        /// <summary>
+        /// lnkCreateCourse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink lnkCreateCourse;
 
         /// <summary>
         /// rptSchedule control.

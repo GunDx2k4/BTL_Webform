@@ -27,7 +27,7 @@
                                             <ItemTemplate>
                                                 <div class="col-md-4">
                                                     <div class="card h-100 shadow-sm">
-                                                        <asp:Image ID="imgCourse" runat="server" ImageUrl='<%# "./Assets/" + "1.jpg"/*Eval("Img")*/ %>' CssClass="card-img-top" AlternateText="Course Image" />
+                                                        <asp:Image ID="imgCourse" runat="server" ImageUrl='<%# "./Assets/" + Eval("Img") %>' CssClass="card-img-top" AlternateText="Course Image" />
                                                         <div class="card-body">
                                                             <span class="badge bg-primary mb-2"><%# Eval("Category") %></span>
                                                             <h5 class="card-title">
